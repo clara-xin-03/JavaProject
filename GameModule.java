@@ -8,24 +8,26 @@ public class GameModule {
     }
 
     public void run() {
-        // boolean = true;
-        // while() {
+  
             UI.heading();
             player.userLogin();
-            UI.heading();
-            player.showUserInfo();
-            UI.oneDot();
-            
-            dealer.shuffle();
-            
-            gameStart();
-            gameEnd();
-            dealer.resetDeck(dealer, player) ;
-            // bettingGame();
-            // endScore();
-            // nextGame();
+            boolean start = true;
 
-        // }
+            while(start) { 
+                UI.heading();
+                player.showUserInfo();
+                UI.oneDot();  
+                dealer.shuffle();
+                gameStart();
+                dealer.resetGame(dealer, player);
+                start = nextGame();
+            }
+    }
+
+    public boolean nextGame() {
+        boolean a; 
+        a = Keyboard.readBoolean("Next Game? (Y/N)") ;
+        return a;
     }
 
 
@@ -38,8 +40,6 @@ public class GameModule {
     public void gameStart() {
         for(int round = 1; round <=4; round++) {
             UI.oneDot();
-
-            
             System.out.println("Dealer dealing cards - ROUND " + round);
             UI.oneDot();
             if(round ==1) {
@@ -47,12 +47,23 @@ public class GameModule {
             
             }
             dealer.dealCardtoAll(player, dealer);
-
             dealer.showCardsOnHand(false);
 
             player.showCardsOnHand(true);
             player.showTotalValue();
+            
+            boolean end = player.betting(dealer,player, round);
+            if(end) {
+                break;
+            }
+            if(round == 4) {
+                gameEnd();
+
+            }
+            
+
         }
+        
         
     }
 
