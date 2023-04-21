@@ -144,4 +144,20 @@ public class Keyboard {
 	public static void line(int len, String c) {
 		System.out.println(String.format("%" + len + "s", " ").replaceAll(" ", c));
 	}
+
+	public static boolean readQC(String prompt) {
+		boolean valid = false;
+		while (!valid) {
+			String input = readString(prompt);
+			if (input.equalsIgnoreCase("C")) {
+				return true;
+			} else if (input.equalsIgnoreCase("Q")) {
+				return false;
+			} else {
+				System.out.println("*** Please enter Q/C or c/q ***");
+			}
+		}
+		return false;
+	}
+
 }

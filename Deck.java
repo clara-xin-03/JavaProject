@@ -8,20 +8,18 @@ public class Deck {
         String[] suits = { "Diamond", "Club", "Heart", "Spade" };
         for (int i = 0; i < suits.length; i++) {
 
-            Card card1 = new Card("Ace", 1, suits[i]);
+            Card card1 = new Card("Ace", 1, suits[i], i, 1 );
             cards.add(card1);
             for (int j = 2; j <= 10; j++) {
-                Card card2 = new Card("" + j, j, suits[i]);
+                Card card2 = new Card("" + j, j, suits[i], i, j);
                 cards.add(card2);
-
             }
-            Card card3 = new Card("Jack", 10, suits[i]);
+            Card card3 = new Card("Jack", 10, suits[i],i, 11);
             cards.add(card3);
-            Card card4 = new Card("Queen", 10, suits[i]);
+            Card card4 = new Card("Queen", 10, suits[i],i, 12);
             cards.add(card4);
-            Card card5 = new Card("King", 10, suits[i]);
+            Card card5 = new Card("King", 10, suits[i],i,13);
             cards.add(card5);
-
         }
     }
 
@@ -29,11 +27,9 @@ public class Deck {
         for (int i = 0; i < cards.size(); i++) {
             System.out.println(cards.get(i));
         }
-
     }
 
     public void shuffleCard() {
-
         Random random = new Random();
         for (int i = 0; i < 1000; i++) {
             int indexA = random.nextInt(cards.size());
@@ -63,7 +59,7 @@ public class Deck {
 
     public static void main(String[] args) {
         Deck d = new Deck();
-        d.shuffleCard();
+        // d.shuffleCard();
         d.showCards();
     }
 
